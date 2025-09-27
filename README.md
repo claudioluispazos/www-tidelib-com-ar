@@ -2,29 +2,15 @@
 
 Este proyecto contiene tanto la API como el frontend de Tidelib en un solo repositorio para facilitar el desarrollo.
 
-## Estructura del Proyecto
+## 🚀 Instalación Rápida
 
-```
-www-tidelib-com-ar/
-├── api/                 # Backend Laravel (rama main)
-├── front/               # Frontend Vue.js (rama desaGabyFrontend)
-├── package.json         # Scripts para manejar ambos proyectos
-└── README.md           # Este archivo
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/claudioluispazos/www.tidelib.com.ar.git
+cd www.tidelib.com.ar
 ```
 
-## Tecnologías
-
-- **API**: Laravel (PHP)
-- **Frontend**: Vue.js 3 + Vite
-- **Base de datos**: MySQL/PostgreSQL
-- **Frontend assets**: Vite + Bootstrap 5
-- **Estado**: Pinia
-- **Routing**: Vue Router
-
-## Instalación
-
-### 1. Instalar dependencias
-
+### 2. Instalar dependencias
 ```bash
 # Instalar dependencias de ambos proyectos
 npm run install:all
@@ -34,8 +20,7 @@ npm run install:api    # composer install en api/
 npm run install:front  # npm install en front/
 ```
 
-### 2. Configurar variables de entorno
-
+### 3. Configurar variables de entorno
 ```bash
 # Copiar archivos de configuración
 cp api/.env.example api/.env
@@ -46,8 +31,7 @@ nano api/.env
 nano front/.env
 ```
 
-### 3. Configurar base de datos
-
+### 4. Configurar base de datos
 ```bash
 # Ejecutar migraciones
 npm run migrate
@@ -56,10 +40,9 @@ npm run migrate
 npm run fresh
 ```
 
-## Desarrollo
+## 🛠️ Desarrollo
 
 ### Ejecutar ambos proyectos simultáneamente
-
 ```bash
 npm run dev
 ```
@@ -69,7 +52,6 @@ Esto ejecutará:
 - Frontend en http://localhost:5173 (Vite)
 
 ### Ejecutar proyectos por separado
-
 ```bash
 # Solo API
 npm run dev:api
@@ -78,7 +60,34 @@ npm run dev:api
 npm run dev:front
 ```
 
-## Scripts Disponibles
+## 📁 Estructura del Proyecto
+
+```
+www-tidelib-com-ar/
+├── api/                 # Backend Laravel (rama main)
+│   ├── app/
+│   ├── config/
+│   ├── database/
+│   ├── routes/
+│   └── ...
+├── front/               # Frontend Vue.js (rama desaGabyFrontend)
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── ...
+├── design/              # Imágenes de diseño
+├── package.json         # Scripts para manejar ambos proyectos
+└── README.md           # Este archivo
+```
+
+## 🎨 Tecnologías
+
+- **API**: Laravel (PHP) con Swagger, Livewire, Sanctum
+- **Frontend**: Vue.js 3 + Vite + Bootstrap 5 + Pinia + Vue Router
+- **Base de datos**: MySQL/PostgreSQL
+- **Desarrollo**: Scripts npm para manejar ambos proyectos
+
+## 📋 Scripts Disponibles
 
 - `npm run dev` - Ejecutar ambos proyectos en desarrollo
 - `npm run build` - Construir ambos proyectos para producción
@@ -87,10 +96,10 @@ npm run dev:front
 - `npm run fresh` - Resetear DB y ejecutar seeders
 - `npm run install:all` - Instalar todas las dependencias
 
-## Comandos Laravel Útiles
+## 🔧 Comandos Laravel Útiles
 
 ```bash
-# En la carpeta api/ o front/
+# En la carpeta api/
 php artisan serve                    # Servidor de desarrollo
 php artisan migrate                 # Ejecutar migraciones
 php artisan migrate:fresh --seed    # Resetear DB con datos de prueba
@@ -99,24 +108,19 @@ php artisan make:model Nombre       # Crear modelo
 php artisan make:livewire Nombre    # Crear componente Livewire
 ```
 
-## Estructura de la API
+## 🌐 URLs de Acceso
 
-La API está en la carpeta `api/` y contiene:
-- Controladores REST
-- Modelos Eloquent
-- Migraciones de base de datos
-- Rutas API
-- Documentación Swagger
+- **API**: http://localhost:8000
+- **Documentación Swagger**: http://localhost:8000/api/documentation
+- **Frontend**: http://localhost:5173
 
-## Estructura del Frontend
+## 📝 Notas Importantes
 
-El frontend está en la carpeta `front/` y contiene:
-- Componentes Livewire
-- Vistas Blade
-- Assets compilados con Vite
-- Estilos con Tailwind CSS
+- Las dependencias (`node_modules` y `vendor`) no están incluidas en el repositorio
+- Usa `npm run install:all` después de clonar para instalar todas las dependencias
+- El archivo `.env` debe ser configurado según tu entorno local
 
-## Contribución
+## 🤝 Contribución
 
 1. Hacer cambios en la rama correspondiente
 2. Probar ambos proyectos con `npm run dev`
