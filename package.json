@@ -1,0 +1,30 @@
+{
+  "name": "www-tidelib-com-ar",
+  "version": "1.0.0",
+  "description": "Tidelib - API y Frontend en monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:front\"",
+    "dev:api": "cd api && php artisan serve",
+    "dev:front": "cd front && npm run dev",
+    "build": "npm run build:api && npm run build:front",
+    "build:api": "cd api && composer install --no-dev --optimize-autoloader",
+    "build:front": "cd front && npm run build",
+    "install:all": "npm run install:api && npm run install:front",
+    "install:api": "cd api && composer install",
+    "install:front": "cd front && npm install",
+    "test": "npm run test:api && npm run test:front",
+    "test:api": "cd api && php artisan test",
+    "test:front": "cd front && npm run test",
+    "migrate": "cd api && php artisan migrate",
+    "seed": "cd api && php artisan db:seed",
+    "fresh": "cd api && php artisan migrate:fresh --seed"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "workspaces": [
+    "api",
+    "front"
+  ]
+}

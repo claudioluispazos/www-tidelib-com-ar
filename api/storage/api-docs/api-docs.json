@@ -1,0 +1,1319 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de TideLib",
+        "description": "API para la aplicación de biblioteca TideLib",
+        "contact": {
+            "email": "admin@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://tidelib.com.ar",
+            "description": "API Server"
+        },
+        {
+            "url": "http://tidelib.localhost",
+            "description": "Servidor de pruebas"
+        }
+    ],
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Iniciar sesión (público)",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login exitoso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Login exitoso"
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|abcdefghijklmnopqrstuvwxyz"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciales inválidas"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Cerrar sesión (requiere autenticación)",
+                "operationId": "ad65cbbd4e9f201619eae184a5961a98",
+                "responses": {
+                    "200": {
+                        "description": "Cierre de sesión exitoso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cierre de sesión exitoso"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "No autenticado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Registrar un nuevo usuario (público)",
+                "operationId": "c7bb21a0d87049e161b8e4c9b0d909f2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario registrado correctamente"
+                    },
+                    "422": {
+                        "description": "Datos de registro inválidos"
+                    }
+                }
+            }
+        },
+        "/api/auth/forgot-password": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Solicitar restablecimiento de contraseña (público)",
+                "operationId": "f51c7074de53475eab87e336cc4e06a6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Código de restablecimiento enviado"
+                    },
+                    "422": {
+                        "description": "Email no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/auth/reset-password": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Restablecer contraseña con código (público)",
+                "operationId": "96e44e1ebcd811418fd95ee4c56162f0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "code",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "newpassword123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "newpassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contraseña restablecida correctamente"
+                    },
+                    "422": {
+                        "description": "Datos inválidos"
+                    }
+                }
+            }
+        },
+        "/api/auth/email/verify": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Verificar email con código (público)",
+                "operationId": "bc33b6f88c01840741eabfb844221d40",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "code"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "code": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Email verificado correctamente"
+                    },
+                    "400": {
+                        "description": "Código inválido o expirado"
+                    }
+                }
+            }
+        },
+        "/api/auth/email/verification-notification": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Reenviar email de verificación (público)",
+                "operationId": "4f7c11694a64fae1c3857a44b1032ef0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Email de verificación enviado"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    },
+                    "400": {
+                        "description": "Email ya verificado"
+                    }
+                }
+            }
+        },
+        "/api/autores/become": {
+            "post": {
+                "tags": [
+                    "Autores"
+                ],
+                "summary": "Convertir usuario autenticado en autor",
+                "operationId": "cddb1365f3d1e9bce3dd9b2853df57d1",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "apellido",
+                                    "email",
+                                    "nacionalidad"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Miguel"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "de Cervantes"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "cervantes@example.com"
+                                    },
+                                    "nacionalidad": {
+                                        "type": "string",
+                                        "example": "Española"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Autor creado y asociado al usuario",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Autor"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Ya era autor, devuelve autor asociado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Autor"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Datos inválidos"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/generos": {
+            "get": {
+                "tags": [
+                    "Géneros"
+                ],
+                "summary": "Obtener todos los géneros (público)",
+                "operationId": "e4145cae641529449a72267155866544",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Número de página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Cantidad de géneros por página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de géneros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Genero"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Géneros"
+                ],
+                "summary": "Crear un nuevo género (requiere autenticación)",
+                "operationId": "3788694dcb538af69aebd4a2f58be888",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Genero"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Género creado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Genero"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Datos de entrada inválidos"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/generos/{id}": {
+            "get": {
+                "tags": [
+                    "Géneros"
+                ],
+                "summary": "Obtener un género por ID (público)",
+                "operationId": "82a66664b0eec40afcf6bc2162ea9bdc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del género",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles del género",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Genero"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Género no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Géneros"
+                ],
+                "summary": "Actualizar un género (requiere autenticación)",
+                "operationId": "62f0612baf9a773ad1e3e26105fec15e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del género",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Genero"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Género actualizado"
+                    },
+                    "404": {
+                        "description": "Género no encontrado"
+                    },
+                    "422": {
+                        "description": "Datos de entrada inválidos"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Géneros"
+                ],
+                "summary": "Eliminar un género (requiere autenticación)",
+                "operationId": "e9f30448706094bdb86db50b8795d333",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del género",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Género eliminado"
+                    },
+                    "404": {
+                        "description": "Género no encontrado"
+                    },
+                    "409": {
+                        "description": "No se puede eliminar, tiene libros asociados"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/libros": {
+            "get": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Obtener todos los libros (público)",
+                "operationId": "02f459e8cb0531a0017a846e38ff1c1b",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Número de página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Cantidad de libros por página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Término de búsqueda",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de libros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Libro"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Publicar un libro (requiere autenticación). Acepta multipart para portada y ebook.",
+                "operationId": "40310b2535310c03c4ee9d17b8c849d3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "titulo",
+                                    "autor_id",
+                                    "genero_id",
+                                    "editorial_id"
+                                ],
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string"
+                                    },
+                                    "isbn": {
+                                        "type": "string"
+                                    },
+                                    "idioma": {
+                                        "type": "string"
+                                    },
+                                    "precio": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "sinopsis": {
+                                        "type": "string"
+                                    },
+                                    "autor_id": {
+                                        "type": "integer"
+                                    },
+                                    "genero_id": {
+                                        "type": "integer"
+                                    },
+                                    "editorial_id": {
+                                        "type": "integer"
+                                    },
+                                    "imagen_portada": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "archivo_ebook": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Libro creado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Libro"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "No autorizado para este autor"
+                    },
+                    "422": {
+                        "description": "Datos de entrada inválidos"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/libros/{id}": {
+            "get": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Obtener un libro por ID (público)",
+                "operationId": "09c7aa171b7d8d4f102e42b90164ff28",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detalles del libro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Libro"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Libro no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Actualizar un libro (requiere autenticación)",
+                "operationId": "46787c94afa4f6d285b70cd944e4f56e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Libro"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Libro actualizado"
+                    },
+                    "404": {
+                        "description": "Libro no encontrado"
+                    },
+                    "422": {
+                        "description": "Datos de entrada inválidos"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Eliminar un libro (requiere autenticación)",
+                "operationId": "84d0708893307c59053966fd617fb172",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Libro eliminado"
+                    },
+                    "404": {
+                        "description": "Libro no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/libros/por-autor/{autorId}": {
+            "get": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Listar libros por autor (público)",
+                "operationId": "59618471a94bd297ba539fcf0fdbe68c",
+                "parameters": [
+                    {
+                        "name": "autorId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de libros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Libro"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/mis-libros": {
+            "get": {
+                "tags": [
+                    "Libros"
+                ],
+                "summary": "Listar libros del autor asociado al usuario autenticado",
+                "operationId": "ab3a179bd0bbacb45a06b02ec1289e16",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de libros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Libro"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Autor": {
+                "required": [
+                    "nombre",
+                    "apellido",
+                    "email",
+                    "nacionalidad"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Class Autor",
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Miguel"
+                    },
+                    "apellido": {
+                        "type": "string",
+                        "example": "de Cervantes"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "cervantes@example.com"
+                    },
+                    "nacionalidad": {
+                        "type": "string",
+                        "example": "Española"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Biografia": {
+                "properties": {
+                    "id": {
+                        "description": "Class Biografia",
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "contenido": {
+                        "type": "string",
+                        "example": "Miguel de Cervantes fue un novelista, poeta y dramaturgo español."
+                    },
+                    "fecha_nacimiento": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1547-09-29",
+                        "nullable": true
+                    },
+                    "fecha_fallecimiento": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1616-04-22",
+                        "nullable": true
+                    },
+                    "lugar_nacimiento": {
+                        "type": "string",
+                        "example": "Alcalá de Henares, España",
+                        "nullable": true
+                    },
+                    "autor_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Editorial": {
+                "required": [
+                    "razon_social"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Class Editorial",
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "razon_social": {
+                        "type": "string",
+                        "example": "Grupo Planeta"
+                    },
+                    "denominacion_social": {
+                        "type": "string",
+                        "example": "Editorial Planeta S.A.",
+                        "nullable": true
+                    },
+                    "cuit": {
+                        "type": "string",
+                        "example": "30-12345678-9",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "contacto@planeta.es",
+                        "nullable": true
+                    },
+                    "direccion": {
+                        "type": "string",
+                        "example": "Calle Falsa 123",
+                        "nullable": true
+                    },
+                    "sitio_web": {
+                        "type": "string",
+                        "example": "https://www.planetadelibros.com",
+                        "nullable": true
+                    },
+                    "facebook": {
+                        "type": "string",
+                        "example": "https://facebook.com/planetadelibros",
+                        "nullable": true
+                    },
+                    "instagram": {
+                        "type": "string",
+                        "example": "https://instagram.com/planetadelibros",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Genero": {
+                "required": [
+                    "nombre"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Class Genero",
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "example": "Novela"
+                    },
+                    "descripcion": {
+                        "type": "string",
+                        "example": "Género literario de ficción que narra acciones representadas como si fueran reales",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Libro": {
+                "required": [
+                    "titulo",
+                    "autor_id",
+                    "editorial_id",
+                    "genero_id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Class Libro",
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "titulo": {
+                        "type": "string",
+                        "example": "El Quijote"
+                    },
+                    "isbn": {
+                        "type": "string",
+                        "example": "978-3-16-148410-0",
+                        "nullable": true
+                    },
+                    "idioma": {
+                        "type": "string",
+                        "example": "Español",
+                        "nullable": true
+                    },
+                    "precio": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 29.99,
+                        "nullable": true
+                    },
+                    "imagen_portada": {
+                        "type": "string",
+                        "example": "libros/quijote.jpg",
+                        "nullable": true
+                    },
+                    "archivo_ebook": {
+                        "type": "string",
+                        "example": "libros/ebooks/quijote.epub",
+                        "nullable": true
+                    },
+                    "sinopsis": {
+                        "type": "string",
+                        "example": "Una historia sobre un caballero andante...",
+                        "nullable": true
+                    },
+                    "autor_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "genero_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "editorial_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    },
+                    "autor": {
+                        "$ref": "#/components/schemas/Autor"
+                    },
+                    "editorial": {
+                        "$ref": "#/components/schemas/Editorial"
+                    },
+                    "genero": {
+                        "$ref": "#/components/schemas/Genero"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "readOnly": true,
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "user@example.com"
+                    },
+                    "email_verified_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T00:00:00Z",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true,
+                        "example": "2023-01-01T00:00:00Z"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Autenticación",
+            "description": "Operaciones de autenticación"
+        },
+        {
+            "name": "Autores",
+            "description": "Operaciones para gestión de autores y onboarding"
+        },
+        {
+            "name": "Géneros",
+            "description": "Operaciones relacionadas con géneros"
+        },
+        {
+            "name": "Libros",
+            "description": "Operaciones relacionadas con libros"
+        }
+    ]
+}

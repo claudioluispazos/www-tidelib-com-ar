@@ -1,0 +1,132 @@
+{
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
+    "file": "assets/bootstrap-icons-BOrJxbIo.woff",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons-BtvjY1KL.woff2",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-0hpy6x2w.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DFWP1JMt.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/scss/app.scss": {
+    "file": "assets/app-tGQcggiY.css",
+    "src": "resources/scss/app.scss",
+    "isEntry": true
+  },
+  "resources/tidelib/css/cargar_obra.css": {
+    "file": "assets/cargar_obra-C9sEb3dA.css",
+    "src": "resources/tidelib/css/cargar_obra.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/contacto.css": {
+    "file": "assets/contacto-DX5-wFjO.css",
+    "src": "resources/tidelib/css/contacto.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/correctores.css": {
+    "file": "assets/correctores-BJnUMWOU.css",
+    "src": "resources/tidelib/css/correctores.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/correo.css": {
+    "file": "assets/correo-B38TLCqG.css",
+    "src": "resources/tidelib/css/correo.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/editoriales.css": {
+    "file": "assets/editoriales-ByZBkpnB.css",
+    "src": "resources/tidelib/css/editoriales.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/estilo.css": {
+    "file": "assets/estilo-BNvwyPly.css",
+    "src": "resources/tidelib/css/estilo.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/formulario_corrector.css": {
+    "file": "assets/formulario_corrector-DeVSds94.css",
+    "src": "resources/tidelib/css/formulario_corrector.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/genero.css": {
+    "file": "assets/genero-DO4ik-q-.css",
+    "src": "resources/tidelib/css/genero.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/generos_2.css": {
+    "file": "assets/generos_2-DRFEvG9b.css",
+    "src": "resources/tidelib/css/generos_2.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/intercambio.css": {
+    "file": "assets/intercambio-BjnFiOe0.css",
+    "src": "resources/tidelib/css/intercambio.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/lateral.css": {
+    "file": "assets/lateral-BjBUboqJ.css",
+    "src": "resources/tidelib/css/lateral.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/lateral_2.css": {
+    "file": "assets/lateral_2-BoRZHi7a.css",
+    "src": "resources/tidelib/css/lateral_2.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/menu_perfil.css": {
+    "file": "assets/menu_perfil-Cjig0ObB.css",
+    "src": "resources/tidelib/css/menu_perfil.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/patrocinar_obra.css": {
+    "file": "assets/patrocinar_obra-R2-jFJ-d.css",
+    "src": "resources/tidelib/css/patrocinar_obra.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/perfil_descripcion.css": {
+    "file": "assets/perfil_descripcion-CVLyH65_.css",
+    "src": "resources/tidelib/css/perfil_descripcion.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/perfil_patrocinio.css": {
+    "file": "assets/perfil_patrocinio-DW3TJ9SN.css",
+    "src": "resources/tidelib/css/perfil_patrocinio.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/portadas.css": {
+    "file": "assets/portadas-qDCoYCm0.css",
+    "src": "resources/tidelib/css/portadas.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/screen_advertencia.css": {
+    "file": "assets/screen_advertencia-CiyU8FJ8.css",
+    "src": "resources/tidelib/css/screen_advertencia.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/video.css": {
+    "file": "assets/video-Cefis9mb.css",
+    "src": "resources/tidelib/css/video.css",
+    "isEntry": true
+  },
+  "resources/tidelib/css/vision_ovjetivo.css": {
+    "file": "assets/vision_ovjetivo-D-dYsVVf.css",
+    "src": "resources/tidelib/css/vision_ovjetivo.css",
+    "isEntry": true
+  },
+  "resources/tidelib/js/carousel.js": {
+    "file": "assets/carousel-DHgi2X2f.js",
+    "name": "carousel",
+    "src": "resources/tidelib/js/carousel.js",
+    "isEntry": true
+  }
+}

@@ -1,0 +1,88 @@
+.banner_generos{
+    background-color: cornsilk;
+    height: 30px;
+    display: flex;
+    padding-left: 30px;
+    
+}
+.banner_generos .item {
+    flex-grow: 1;
+    align-self: center;
+    color:#ff393eff;
+    font-family: "Alata", sans-serif;
+    height: 35px;
+    margin-top:19px;
+    
+}
+
+
+.banner_generos2{
+    display: none;
+    background-color: cornsilk;
+}
+.banner_generos2 .item{
+    color: red;
+    background-color: cornsilk;
+    height: 30px;
+    display: flex;
+    width: 100vh;
+    padding-left: 30px;
+    
+}
+.banner_generos2 > ul > li > ul{
+    display: none;
+    
+}
+
+.banner_generos2 > ul > li:hover > ul{
+    display: block;
+    
+
+}
+.banner_sticky{
+    position: fixed;
+    top: 60px;
+    z-index:2;
+    width: 100%;
+}
+
+#icono_generos {
+    position: relative;
+    margin-right: 5px;
+    height: 20px;
+    width: auto;
+    float: left;
+    
+}
+
+@media screen and (max-width: 600px) {
+    .banner_generos{
+        display: none;
+    }
+    .banner_generos2{
+        display: block;
+        
+    }
+    #icono_generos {
+        position: relative;
+        margin-right: 5px;
+        height: 20px;
+        margin-top: -3px;
+        width: auto;
+        float: left;
+        
+    }
+    .banner_generos2 .item {
+        flex-grow: 1;
+        align-self: center;
+        color:#ff393eff;
+        font-family:"Alata", sans-serif;
+        height: 35px;
+        margin-top:0px;
+        width: 180px;
+        
+    }
+   
+        
+}
+

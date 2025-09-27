@@ -1,0 +1,62 @@
+
+.lateral {
+    width: 55px;
+    max-height: 900px;
+    background-color:cornsilk;
+    position: absolute;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    color: rgb(121, 120, 120);
+    z-index: -1;
+}
+.lateral:hover {
+    width: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.encabezado_los_mas_leido{
+    margin-top:  15px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: none;
+}
+.bloque_perfil_lateral{
+    display: flex;
+    margin: 4px;
+    border-radius: 10px;
+    box-shadow: 5px, 5px, 20px rgba(0, 0, 0, 0.5);
+    background-color: cornsilk;
+
+       
+}
+#portada_lateral{
+    margin: 8px;
+    border-radius: 50%;
+    height: 30px;
+    width:30px;
+    
+    
+}
+.titulo_lateral{
+    margin-top: 4%;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5em;
+    color: rgb(99, 99, 99);
+    font-weight: 600;
+    display: none;
+}
+.idioma_lateral{
+    margin-top: 19%;
+    font-size: 0.8em;
+    margin-left: 3.5%;
+    position: absolute;
+
+}
+
+.lateral_sticky{
+    position: fixed;
+    top: 97px;
+    bottom: 0px;
+    z-index: 500;
+}

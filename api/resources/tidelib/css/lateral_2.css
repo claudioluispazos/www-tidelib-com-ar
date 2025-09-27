@@ -1,0 +1,41 @@
+
+.lateral {
+    width: 100%;
+    background-color:cornsilk;
+    overflow-y: hidden;
+    color: rgb(121, 120, 120);
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.bloque_perfil_lateral{
+    display: flex;
+    position:relative;
+    margin: 4px;
+
+}
+
+#portada_lateral{
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    position: relative;
+    margin: 0px;
+}
+.lateral:hover {
+    width: auto;
+    overlay: scroll;
+    overflow-y: hidden;
+}
+.titulo_lateral {
+    display: none;
+}
+.encabezado_los_mas_leido {
+    display: none;
+}
+.lateral_sticky{
+    position: fixed;
+    top: 90px;
+    z-index: 1;
+}

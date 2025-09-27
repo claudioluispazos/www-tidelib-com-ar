@@ -1,0 +1,93 @@
+body{
+    margin:0px;
+    background: rgb(195, 195, 196);
+    display: flex;  
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+}
+.base_registro{
+    position: relative;
+    margin-top: 60px;
+    margin-bottom: 0px;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(#ff393eff, pink);
+}
+.registro{
+    float: right;
+    color:cornsilk;
+    width: 250px;
+    padding: 6px;
+    margin-top: 6px;
+    margin-right: 20px;
+    background:rgb(228, 99, 99);
+    border: solid 1px;
+    border-radius: 10px;
+}
+.registro:hover{
+
+    background-color: rgb(207, 141, 136);
+}
+.contenedor_targeta{
+    position:relative;
+    border-radius: 10px;
+    margin: 10px;
+    position: relative;
+    background: rgb(236, 236, 236);
+    height: 550px;
+    width: 300px;
+    flex-wrap: wrap;
+    zoom: 75%;
+    box-shadow: 2px 2px 7px black;
+}
+.contenedor_doble{
+    height: 153px;
+    width: 100%;
+    display: flex;
+    
+}
+.img_perfil{
+    right: auto;
+    width: 140px;
+    margin: 5px;
+    
+}
+.datos_personales{
+    color:rgb(85, 85, 85);
+    position: relative;
+    margin: 5px;
+    display: block;
+    height: 140px;
+    width: auto;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+
+}
+.descripción{
+    position: relative;
+    margin-top: 0px;
+    margin-left: 8px;
+    color:rgb(85, 85, 85);
+}
+.text_descripción{
+    margin: 8px;
+    position: relative;
+    color:rgb(85, 85, 85);
+    margin-top: 5px;
+}
+.contacto_whatsapp{
+    color:rgb(85, 85, 85);
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 30px;
+    align-items: center;
+    margin: 5px;
+}
+#ico{
+    height: 30px;
+    width: auto;
+    margin: 5px;
+}
+.bloque_de_contacto{
+    margin-top: 20px;
+}

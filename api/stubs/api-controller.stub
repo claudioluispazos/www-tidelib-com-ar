@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\{{ model }};
+use App\Http\Controllers\Api\BaseApiController;
+
+class {{ class }} extends BaseApiController
+{
+    public function __construct()
+    {
+        $this->model = {{ model }}::class;
+        parent::__construct();
+    }
+
+    // Aquí puedes agregar métodos específicos para este controlador si es necesario
+}

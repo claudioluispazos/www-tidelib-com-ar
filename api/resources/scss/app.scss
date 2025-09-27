@@ -1,0 +1,22 @@
+// Variables personalizadas
+$primary: #ff393e;
+$navbar-dark-color: #fff;
+
+// Importar Bootstrap
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+.navbar {
+    background-color: $primary !important;
+}
+
+body {
+    padding-top: 70px; // Ajusta el valor según la altura de la navbar
+}
+#carouselTidelib {
+    width: 100%;
+    max-width: 100vw;
+    .carousel-inner {
+        width: 100%;
+    }
+}
