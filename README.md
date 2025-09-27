@@ -7,7 +7,7 @@ Este proyecto contiene tanto la API como el frontend de Tidelib en un solo repos
 ```
 www-tidelib-com-ar/
 ├── api/                 # Backend Laravel (rama main)
-├── front/               # Frontend Laravel (rama desaGabyFrontend)
+├── front/               # Frontend Vue.js (rama desaGabyFrontend)
 ├── package.json         # Scripts para manejar ambos proyectos
 └── README.md           # Este archivo
 ```
@@ -15,9 +15,11 @@ www-tidelib-com-ar/
 ## Tecnologías
 
 - **API**: Laravel (PHP)
-- **Frontend**: Laravel con Livewire
+- **Frontend**: Vue.js 3 + Vite
 - **Base de datos**: MySQL/PostgreSQL
-- **Frontend assets**: Vite + Tailwind CSS
+- **Frontend assets**: Vite + Bootstrap 5
+- **Estado**: Pinia
+- **Routing**: Vue Router
 
 ## Instalación
 

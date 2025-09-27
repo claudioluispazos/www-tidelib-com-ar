@@ -13,9 +13,8 @@
     "install:all": "npm run install:api && npm run install:front",
     "install:api": "cd api && composer install",
     "install:front": "cd front && npm install",
-    "test": "npm run test:api && npm run test:front",
+    "test": "npm run test:api",
     "test:api": "cd api && php artisan test",
-    "test:front": "cd front && npm run test",
     "migrate": "cd api && php artisan migrate",
     "seed": "cd api && php artisan db:seed",
     "fresh": "cd api && php artisan migrate:fresh --seed"
