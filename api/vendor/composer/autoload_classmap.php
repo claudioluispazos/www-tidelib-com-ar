@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Commands\\MakeApiResource' => $baseDir . '/app/Console/Commands/MakeApiResource.php',
     'App\\Http\\Controllers\\Api\\AuthController' => $baseDir . '/app/Http/Controllers/Api/AuthController.php',
-    'App\\Http\\Controllers\\Api\\BaseApiController' => $baseDir . '/app/Http/Controllers/Api/BaseApiController.php',
+    'App\\Http\\Controllers\\Api\\AutorController' => $baseDir . '/app/Http/Controllers/Api/AutorController.php',
     'App\\Http\\Controllers\\Api\\GeneroController' => $baseDir . '/app/Http/Controllers/Api/GeneroController.php',
     'App\\Http\\Controllers\\Api\\LibroController' => $baseDir . '/app/Http/Controllers/Api/LibroController.php',
     'App\\Http\\Controllers\\Auth\\VerifyEmailController' => $baseDir . '/app/Http/Controllers/Auth/VerifyEmailController.php',
@@ -41,6 +41,8 @@ return array(
     'App\\Models\\Libro' => $baseDir . '/app/Models/Libro.php',
     'App\\Models\\Study' => $baseDir . '/app/Models/Study.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Notifications\\CustomResetPassword' => $baseDir . '/app/Notifications/CustomResetPassword.php',
+    'App\\Notifications\\CustomVerifyEmail' => $baseDir . '/app/Notifications/CustomVerifyEmail.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\VoltServiceProvider' => $baseDir . '/app/Providers/VoltServiceProvider.php',
     'App\\View\\Components\\AppLayout' => $baseDir . '/app/View/Components/AppLayout.php',

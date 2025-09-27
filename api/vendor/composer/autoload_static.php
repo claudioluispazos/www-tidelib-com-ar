@@ -564,7 +564,7 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
     public static $classMap = array (
         'App\\Console\\Commands\\MakeApiResource' => __DIR__ . '/../..' . '/app/Console/Commands/MakeApiResource.php',
         'App\\Http\\Controllers\\Api\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AuthController.php',
-        'App\\Http\\Controllers\\Api\\BaseApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BaseApiController.php',
+        'App\\Http\\Controllers\\Api\\AutorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AutorController.php',
         'App\\Http\\Controllers\\Api\\GeneroController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/GeneroController.php',
         'App\\Http\\Controllers\\Api\\LibroController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/LibroController.php',
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
@@ -597,6 +597,8 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'App\\Models\\Libro' => __DIR__ . '/../..' . '/app/Models/Libro.php',
         'App\\Models\\Study' => __DIR__ . '/../..' . '/app/Models/Study.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Notifications\\CustomResetPassword' => __DIR__ . '/../..' . '/app/Notifications/CustomResetPassword.php',
+        'App\\Notifications\\CustomVerifyEmail' => __DIR__ . '/../..' . '/app/Notifications/CustomVerifyEmail.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\VoltServiceProvider' => __DIR__ . '/../..' . '/app/Providers/VoltServiceProvider.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
