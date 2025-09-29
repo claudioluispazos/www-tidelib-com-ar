@@ -1,234 +1,163 @@
 <template>
-    <div class="banner">
-        <div class="box-title">
-            <h1>Encuentra tu</h1>
-            <h3>Próxima Historia</h3>
-            <div class="line"></div>
-
-            <div class="input-group mb-3 search">
-                <input type="text" v-model="searchInput" class="form-control" placeholder="Buscar libros..."
-                    @keyup.enter="searchBooks" />
-                <button class="btn btn-dark" type="button" @click="searchBooks">
-                    <v-icon name="bi-search" scale="1.5" />
-                </button>
+    <div class="book-showcase">
+        <!-- Imagen principal del libro -->
+        <div class="book-image-section">
+            <div class="book-image-container">
+                <div class="book-image">
+                    <img 
+                        v-if="libroStore.featuredLibro?.imagen_portada" 
+                        :src="libroStore.featuredLibro.imagen_portada" 
+                        :alt="libroStore.featuredLibro.titulo"
+                        class="book-cover"
+                    />
+                    <div v-else class="placeholder-book-image">
+                        <v-icon name="bi-book" scale="4" />
+                        <p>{{ libroStore.featuredLibro?.titulo || 'Libro destacado' }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Texto promocional -->
+            <div class="promotional-text">
+                <p v-if="libroStore.featuredLibro?.sinopsis">
+                    {{ libroStore.featuredLibro.sinopsis }}
+                </p>
+                <p v-else>
+                    Aquí, algún tipo de comentario promocional sobre este increíble libro que te transportará a mundos fantásticos llenos de aventuras y emociones.
+                </p>
             </div>
         </div>
-        <div class="overlay-banner"></div>
     </div>
 </template>
 
 <script setup>
-import { ref, nextTick, onMounted, onUnmounted } from 'vue';
-import useBooksStore from '../../store/booksStore';
+import { onMounted } from 'vue'
+import { useLibroStore } from '../../store/generoLibroStore'
 
-const booksStore = useBooksStore();
-const searchInput = ref("");
-
-const searchBooks = async () => {
-    const query = searchInput.value.trim().toLowerCase();
-
-    booksStore.setSearchQuery(query);
-
-    searchInput.value = "";
-
-    await nextTick(() => {
-        const libraryElement = document.getElementById('library-section');
-        if (libraryElement) {
-            libraryElement.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-};
+const libroStore = useLibroStore()
 
 onMounted(() => {
-    searchInput.value = "";
-    booksStore.setSearchQuery("");
-});
-
-onUnmounted(() => {
-    booksStore.setSearchQuery("");
-});
-
+    libroStore.fetchFeaturedLibro()
+})
 </script>
 
 <style scoped>
-.banner {
-    display: flex;
-    width: 100%;
-    height: 80vh;
-    background-image: url(../../assets/hero-banner.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* background-attachment: fixed; */
-}
-
-.box-title {
-    width: 100%;
-    color: #fff;
-    margin: 120px;
-    position: relative;
-    z-index: 2;
-}
-
-h1 {
-    font-size: 110px;
-    margin: 0 0 10px 50px;
-}
-
-h3 {
-    font-size: 80px;
-    margin: 0 0 10px 50px;
-}
-
-.line {
-    width: 50%;
-    height: 10px;
+.book-showcase {
+    margin-top: 70px; /* Altura del header */
+    margin-left: 20%; /* Ancho del sidebar izquierdo */
+    margin-right: 20%; /* Ancho del sidebar derecho */
+    padding: 0; /* Sin padding para que la imagen ocupe todo el ancho */
     background-color: #fff;
-    margin: 20px 50px;
+    min-height: calc(100vh - 70px);
 }
 
-.search {
-    width: 50%;
-    margin: auto 50px;
+.book-image-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.search .form-control {
-    /* border: 1px solid #fff; */
-    border: none;
-    background: rgba(255, 255, 255, 0.5);
-    /* opacity: .2; */
-}
-
-.overlay-banner {
-    height: 80vh;
+.book-image-container {
     width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(255, 57, 64, 0.15);
-    z-index: 1;
+    position: relative;
+}
+
+.book-image {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-cover {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Mantiene la proporción original de la imagen */
+    object-position: center;
+}
+
+.placeholder-book-image {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+.placeholder-book-image p {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 
-/* ------------------------------------------------------------ */
-/* ---------------------- BANNER RESPONSIVE ------------------- */
-/* ------------------------------------------------------------ */
+.promotional-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 40px;
+}
 
-@media screen and (max-width: 1000px) {
-    .banner {
-        height: 50vh;
-        margin: 70px auto auto auto;
-    }
+.promotional-text p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #e60000;
+}
 
-    .overlay-banner {
-        height: 55vh;
-    }
-
-    .box-title {
-        /* text-align: center; */
-        margin: 80px auto;
-    }
-
-    h1 {
-        font-size: 100px;
-    }
-
-    h3 {
-        font-size: 70px;
-    }
-
-    .line {
-        width: 40%;
-        height: 7px;
-        margin: 20px 50px;
+/* Responsive */
+@media screen and (max-width: 1024px) {
+    .book-showcase {
+        margin-left: 25%;
+        margin-right: 25%;
     }
 }
 
-@media screen and (max-width: 850px) {
-    .banner {
-        height: 50vh;
-        margin: 70px auto auto auto;
+@media screen and (max-width: 768px) {
+    .book-showcase {
+        margin-left: 30%;
+        margin-right: 30%;
     }
-
-    .overlay-banner {
-        height: 57vh;
+    
+    .promotional-text {
+        padding: 0 20px;
     }
-
-    .box-title {
-        /* text-align: center; */
-        margin: 80px auto;
-    }
-
-    h1 {
-        font-size: 80px;
-    }
-
-    h3 {
-        font-size: 50px;
-    }
-
-    .line {
-        width: 40%;
-        height: 7px;
-        margin: 20px 50px;
+    
+    .promotional-text p {
+        font-size: 14px;
+        padding: 15px;
     }
 }
 
-@media screen and (max-width: 600px) {
-    .banner {
-        height: 40vh;
-        margin: 70px auto auto auto;
+@media screen and (max-width: 480px) {
+    .book-showcase {
+        margin-left: 0;
+        margin-right: 0;
     }
-
-    .overlay-banner {
-        height: 48vh;
+    
+    
+    .promotional-text {
+        padding: 0 15px;
     }
-
-    .box-title {
-        margin: 80px auto;
+    
+    .logo-text {
+        font-size: 14px;
     }
-
-    h1 {
-        font-size: 40px;
-    }
-
-    h3 {
-        font-size: 30px;
-    }
-
-    .line {
-        width: 40%;
-        height: 7px;
-        margin: 20px 50px;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .banner {
-        height: 40vh;
-        margin: 70px auto auto auto;
-    }
-
-    .overlay-banner {
-        height: 50vh;
-    }
-
-    .box-title {
-        margin: 80px auto;
-    }
-
-    h1 {
-        font-size: 40px;
-    }
-
-    h3 {
-        font-size: 30px;
-    }
-
-    .line {
-        width: 40%;
-        height: 7px;
-        margin: 20px 50px;
+    
+    .vividl-logo {
+        bottom: 10px;
+        left: 10px;
+        padding: 4px 8px;
     }
 }
 </style>

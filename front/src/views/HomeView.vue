@@ -1,47 +1,83 @@
 <template>
     <div class="home-container">
-        <div class="nav">
-            <Navbar />
-            <!-- <SideBar /> -->
-        </div>
-        <div class="banner">
-            <HeroBanner />
-        </div>
-        <div class="slaide">
-            <SliderBooks />
-        </div>
-        <div class="category">
-            <CategoryItem />
-        </div>
-        <div class="librery">
-            <LibreryItem />
-        </div>
-        <!-- <div class="most-viewed">
-            <MostViewed />
-        </div> -->
-        <div class="footer">
-            <FooterItem />
+        <!-- Header fijo -->
+        <Navbar />
+        
+        <!-- Sidebar izquierdo -->
+        <LeftSidebar />
+        
+        <!-- Sidebar derecho -->
+        <RightSidebar />
+        
+        <!-- Contenido principal -->
+        <div class="main-content">
+            <!-- Resultados de búsqueda (si hay búsqueda activa) -->
+            <SearchResults v-if="libroStore.libros.length > 0 && isSearchActive" />
+            
+            <!-- Contenido normal (si no hay búsqueda) -->
+            <template v-else>
+                <!-- Sección del libro destacado -->
+                <HeroBanner />
+                
+                <!-- Detalles del libro (se revelan al hacer scroll) -->
+                <BookDetails />
+            </template>
         </div>
     </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import Navbar from '../components/Navbar.vue';
+import LeftSidebar from '../components/LeftSidebar.vue';
+import RightSidebar from '../components/RightSidebar.vue';
 import HeroBanner from '../components/home/HeroBanner.vue';
-import SliderBooks from '../components/home/SliderBooks.vue';
-import CategoryItem from '../components/home/CategoryItem.vue';
-import LibreryItem from '../components/home/LibreryItem.vue';
-// import MostViewed from '../components/MostViewed.vue';
-import FooterItem from '../components/FooterItem.vue';
-// import SideBar from '../components/SideBar.vue';
+import BookDetails from '../components/BookDetails.vue';
+import SearchResults from '../components/SearchResults.vue';
+import { useLibroStore } from '../store/generoLibroStore';
+
+const libroStore = useLibroStore()
+
+// Detectar si hay una búsqueda activa
+const isSearchActive = computed(() => {
+    return libroStore.libros.length > 0
+})
 </script>
 
 <style scoped>
 .home-container {
-    position: absolute;
     width: 100%;
-    height: auto;
+    min-height: 100vh;
     background-color: #fff;
-    overflow: hidden;
+    position: relative;
+}
+
+.main-content {
+    margin-left: 20%; /* Ancho del sidebar izquierdo */
+    margin-right: 20%; /* Ancho del sidebar derecho */
+    margin-top: 70px; /* Altura del header */
+    min-height: calc(100vh - 70px);
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+    .main-content {
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main-content {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main-content {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 </style>

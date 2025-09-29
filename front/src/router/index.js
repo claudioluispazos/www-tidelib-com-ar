@@ -4,12 +4,24 @@ import BookView from '../views/BookView.vue';
 import AuthView from '../views/AuthView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import ResetPasswordView from '../views/ResetPasswordView.vue';
+import TestView from '../views/TestView.vue';
+import DebugHome from '../views/DebugHome.vue';
 
 const routes = [
     {
         path: '/',
         name: 'home',
         component: HomeView
+    },
+    {
+        path: '/debug',
+        name: 'debug',
+        component: DebugHome
+    },
+    {
+        path: '/test',
+        name: 'test',
+        component: TestView
     },
     {
         path: '/login',

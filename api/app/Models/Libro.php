@@ -64,7 +64,16 @@ class Libro extends Model
     // Accesor para formatear la URL de la imagen de portada
     public function getImagenPortadaAttribute($value)
     {
-        return $value ? Storage::url($value) : null;
+        if (!$value) return null;
+        
+        // Si ya es una URL completa, devolverla tal como está
+        if (str_starts_with($value, 'http')) {
+            return $value;
+        }
+        
+        // Si es una ruta relativa, convertirla a URL completa
+        $baseUrl = config('app.url');
+        return $baseUrl . '/storage/' . ltrim($value, '/');
     }
 
     // Accesor para formatear la URL del archivo del ebook
